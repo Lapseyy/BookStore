@@ -325,9 +325,9 @@ namespace CPSC131
 						 */
 						T& operator*()
 						{
-							//	TODO: Your code here
 							
-							return *(new T());
+				
+							return *(new cursor_.getElement());
 						}
 					
 					private:
