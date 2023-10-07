@@ -133,7 +133,13 @@ namespace CPSC131
 						///	Constructor that does nothing; YOUR WELCOME
 						Iterator()
 						{
-							/// yw
+							/// yw 
+
+							//":3"
+							/* Node* head_ = nullptr;
+					Node* tail_ = nullptr;
+						Node* cursor_ = nullptr;
+					*/
 						}
 						
 						///	Constructor taking a head and tail pointer; YOUR WELCOME
@@ -148,15 +154,21 @@ namespace CPSC131
 						///	Get a pointer to the head node, or end() if this list is empty
 						Node* begin()
 						{
-							//	TODO: Your code here
-							
-							return nullptr;
+						
+							if (head_ == nullptr ){
+								return end();
+							}
+
+							return head_;
 						}
 						
-						///	Get a node pointer representing "end" (aka "depleted"). Probably want to just use nullptr.
+						///	Get a node pointer representing "end" (aka "depleted"). 
+						//Probably want to just use nullptr.
 						Node* end()
 						{
-							//	TODO: Your code here
+							if (tail_ != nullptr){
+								return tail_;
+							}
 							
 							return nullptr;
 						}
@@ -164,9 +176,9 @@ namespace CPSC131
 						///	Get the node to which this iterator is currently pointing
 						Node* getCursor()
 						{
-							//	TODO: Your code here
+							return cursor_;
 							
-							return nullptr;
+							//return nullptr;
 						}
 						
 						/**
@@ -175,7 +187,7 @@ namespace CPSC131
 						 */
 						Iterator& operator=(const Iterator& other)
 						{
-							//	TODO: Your code here
+							
 							
 							return *this;
 						}
@@ -304,7 +316,10 @@ namespace CPSC131
 						 * You can change to a different method if you wish (and can still pass unit tests)
 						 */
 						Node* cursor_ = nullptr;
-					
+					/* Node* head_ = nullptr;
+					Node* tail_ = nullptr;
+						Node* cursor_ = nullptr;
+					*/
 					friend class DoublyLinkedList;
 				};
 				
