@@ -187,7 +187,10 @@ namespace CPSC131
 						 */
 						Iterator& operator=(const Iterator& other)
 						{
-							
+							head_ = other.begin();
+							tail_ = other.end();
+							cursor_ = other.getCursor();
+			
 							
 							return *this;
 						}
@@ -195,14 +198,18 @@ namespace CPSC131
 						///	Comparison operator
 						bool operator==(const Iterator& other)
 						{
-							//	TODO: Your code here
+							if (head_ == other.begin() && tail_ == other.end() && cursor_ == other.getCursor()){
+								return true;
+							}
 							
 							return false;
 						}
 						///	Inequality comparison operator
 						bool operator!=(const Iterator& other)
 						{
-							//	TODO: Your code here
+							if (head_ != other.begin() && tail_ != other.end() && cursor_ != other.getCursor()){
+								return true;
+							}
 							
 							return false;
 						}
@@ -213,7 +220,8 @@ namespace CPSC131
 						 */
 						Iterator& operator++()
 						{
-							//	TODO: Your code here
+							cursor_= cursor_.getNext();
+
 							
 							return *this;
 						}
@@ -224,9 +232,13 @@ namespace CPSC131
 						 */
 						Iterator operator++(int)
 						{
+							Iterator prev = *this;
+							cursor_ = cursor_.getNext();
+							return prev;
+
 							//	TODO: Your code here
 							
-							return *this;
+							//return *this;
 						}
 						
 						/**
@@ -235,7 +247,8 @@ namespace CPSC131
 						 */
 						Iterator& operator--()
 						{
-							//	TODO: Your code here
+							cursor_= cursor_.getPrev();
+
 							
 							return *this;
 						}
@@ -246,9 +259,9 @@ namespace CPSC131
 						 */
 						Iterator operator--(int)
 						{
-							//	TODO: Your code here
-							
-							return *this;
+							Iterator prev = *this;
+							cursor_ = cursor_->getPrev();
+							return prev;
 						}
 						
 						/**
@@ -257,7 +270,9 @@ namespace CPSC131
 						*/
 						Iterator operator +=(size_t add)
 						{
-							//	TODO: Your code here
+							for(size_t i = 0 ; i < add; i++){
+								cursor_ = cursor_.getNext();
+							}
 							
 							return *this;
 						}
@@ -267,7 +282,9 @@ namespace CPSC131
 						 */
 						Iterator operator -=(size_t add)
 						{
-							//	TODO: Your code here
+							for(size_t i = 0 ; i < add; i++){
+								cursor_ = cursor_.getPrev();
+							}
 							
 							return *this;
 						}
@@ -277,7 +294,12 @@ namespace CPSC131
 						 */
 						Iterator operator +=(int add)
 						{
-							//	TODO: Your code here
+							if(add > 0){
+								*this += add;
+							}
+							else if(add < 0){
+								*this -= add;
+							}
 							
 							return *this;
 						}
@@ -288,6 +310,12 @@ namespace CPSC131
 						Iterator operator -=(int subtract)
 						{
 							//	TODO: Your code here
+							if(subtract > 0){
+								*this -= add;
+							}
+							else if(subtract < 0){
+								*this += add;
+							}
 							
 							return *this;
 						}
