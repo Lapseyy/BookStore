@@ -59,30 +59,50 @@ namespace CPSC131
 					public:
 						
 						/// CTORS
-						Node() : prev_(nullptr), next_(nullptr) {}
-						Node(T element) {}
-						Node(T element, Node* prev, Node* next) {}
+						Node() : prev_(nullptr), next_(nullptr) {
+							//not passing in anything
+						}  
+						Node(T element) {
+							element_ = element;
+							prev_ = nullptr;
+							next_ = nullptr;
+
+						}							//
+						Node(T element, Node* prev, Node* next) {
+							element_ = element; 
+							prev_ = prev;
+							next_ = next;
+						} //
 						
 						/// Set the pointer to the previous element
-						void setPrevious(Node* prev) {}
+						void setPrevious(Node* prev) {
+							//Node* this->prev_(); 
+							this->prev_ = prev; 
+						}
 						
 						/// Set the pointer to the previous element
-						void setPrev(Node* prev) {}
+						void setPrev(Node* prev) {
+							this->prev_ = prev; 
+						}
 						
 						/// Get a pointer to the previous element
-						Node* getPrevious() { return nullptr; }
+						Node* getPrevious() { return this-> prev_; }
 						
 						/// Get a pointer to the previous element
-						Node* getPrev() { return nullptr; }
+						Node* getPrev() { return this->prev_; }
 						
 						/// Set the pointer to the next node
-						void setNext(Node* next) {}
+						void setNext(Node* next) {
+							this->next_ = next;
+						}
 						
 						/// Get a pointer to the next node
-						Node* getNext() { return nullptr; }
+						Node* getNext() { return this->next_; }
 						
 						/// Set the element this node holds
-						void setElement(T element) {}
+						void setElement(T element) {
+							element_ = element;
+						}
 						
 						/// Get the element this node holds
 						///	YOUR WELCOME
