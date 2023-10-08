@@ -44,15 +44,21 @@ int main()
 	CPSC131::DoublyLinkedList::DoublyLinkedList<int> list;
 	
 	//
+	//std::cout << "list is " << list.empty() << std::endl;
 	for ( size_t i = 0; i < 20; i++ ) {
 		int value = (i * 3) - 30;
 		list.push_back(value);
-		std::cout << "value at  " << i << " is " << value << std::endl;
+		//std::cout << "value at  " << i << " is " << value << std::endl;
 	}
-	for ( size_t i = 0; i < 20; i++ ) {
-		std::cout << "Checking after at  " << i << " it is " << list.at(i) << std::endl;
-	}
-	
+	//std::cout << "SIZE is " << list.head_k() << std::endl;
+	// for ( size_t i = 0; i < 20; i++ ) {
+	// 	//std::cout << "Checking after at  " << i << " it is " << list.at(i) << std::endl;
+	// }
+	// std::cout << "SIZE is " << list.size() << std::endl;
+	// //std::cout << "Last is " << list.front() << std::endl;
+	// //ist.pop_front();
+	// std::cout << "SIZE is " << list.size() << std::endl;
+	// std::cout << "Last is " << list.back() << std::endl;
 	
 	
 	

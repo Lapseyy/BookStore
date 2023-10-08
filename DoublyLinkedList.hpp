@@ -678,14 +678,14 @@ namespace CPSC131
 				 */
 				void pop_front()
 				{
-				// if (size_ == 0){
-				// 		throw std::out_of_range("Out of range");
-				// 	}
-				// Node* newHead = head_.getNext();
-				// newHead.setPrev(nullptr);
-				// free(head_);
-				// head_ = newHead;
-				// size_--;
+				if (size_ == 0){
+						throw std::out_of_range("Out of range");
+					}
+				Node* newHead = head_->getNext();
+				newHead->setPrev(nullptr);
+				free(head_);
+				head_ = newHead;
+				size_--;
 				}
 				
 				/**
@@ -694,15 +694,15 @@ namespace CPSC131
 				 * Should throw an exception if our list is empty
 				 */
 				void pop_back()
-				{/*
+				{
 				if (size_ == 0){
 						throw std::out_of_range("Out of range");
 					}
-				Node* newTail = tail_.getPrev();
-				newTail.setNext(nullptr);
+				Node* newTail = tail_->getPrev();
+				newTail->setNext(nullptr);
 				free(tail_);
 				tail_ = newTail;
-				size_--;*/
+				size_--;
 				}
 				
 				/**
@@ -711,12 +711,13 @@ namespace CPSC131
 				 * Throw an exception if the list is empty
 				 */
 				T& front()
-				{/*
-				if (size_ == 0){
+				{
+				
+					if (size_ == 0){
 						throw std::out_of_range("Out of range");
 					}
-					*/
-					return *(new T());
+		
+					return this->head_->getElement();
 				}
 				
 				/**
@@ -726,9 +727,11 @@ namespace CPSC131
 				 */
 				T& back()
 				{
-		
+					if (size_ == 0){
+					throw std::out_of_range("Out of range");
+					}
 					
-					return *(new T());
+					return this->tail_->getElement();
 				}
 				
 				/**
