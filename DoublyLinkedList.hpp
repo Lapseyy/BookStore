@@ -350,23 +350,34 @@ namespace CPSC131
 					*/
 					friend class DoublyLinkedList;
 				};
-				
+				/*
+				Node* head_ = nullptr;
+				Node* tail_ = nullptr;
+				size_t size_ = 0;
+				*/
 				/// Your welcome
 				DoublyLinkedList()
 				{
-					//	TODO: Your code here
+				
 				}
 				
 				///	Copy Constructor
 				DoublyLinkedList(DoublyLinkedList& other)
 				{
-					//	TODO: Your code here
+					head_ = other.head();
+					tail_ = other.tail();
+					size_ = other.size();
+
 				}
 				
 				/// DTOR
 				~DoublyLinkedList()
 				{
-					//	TODO: Your code here
+					head_ = nullptr;
+					tail_ = nullptr;
+					size_ = 0;
+
+			
 				}
 				
 				/**
@@ -376,7 +387,21 @@ namespace CPSC131
 				 */
 				void assign(size_t count, const T& value)
 				{
-					//	TODO: Your code here
+				this->clear();
+				
+				
+				Node* curr = new Node(value, nullptr, nullptr);
+				head_ = curr;
+
+
+				for(size_ i =1; i < count ; i++){
+					Node * newNode = new Node(value, curr, nullptr);
+					curr->setNext(newNode);
+					curr = newNode;
+					
+				}
+				size_ = count; 
+				tail_ = curr;
 				}
 				
 				/**
@@ -397,7 +422,23 @@ namespace CPSC131
 				 */
 				void assign(Iterator first, Iterator last)
 				{
-					//	TODO: Your code here
+					this->clear();
+					
+					Iterator it = first;
+					
+					Node* prev = nullptr;
+					Node* curr = it.getCursor();
+					head_ = curr
+					it++;
+					while (it != last){
+						Node * newNode = it.getCursor();
+						newNode.setPrevious(curr);
+						curr.setNext(newNode);
+						curr = newNode;
+						it++;
+
+					}
+					tail_ = curr;
 				}
 				
 				/// Return a pointer to the head node, if any
@@ -405,7 +446,7 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return nullptr;
+					return head_;
 				}
 				
 				/// Return a pointer to the tail node, if any
@@ -413,7 +454,7 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return nullptr;
+					return tail_;
 				}
 				
 				/**
@@ -421,9 +462,9 @@ namespace CPSC131
 				 */
 				Iterator begin() const
 				{
-					//	TODO: Your code here
 					
-					return Iterator();
+					
+					return Iterator(head_);
 				}
 				
 				/**
@@ -433,7 +474,7 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return Iterator();
+					return Iterator(tail_);
 				}
 				
 				/**
@@ -446,7 +487,7 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return Iterator();
+					return Iterator(nullptr);
 				}
 				
 				/**
@@ -455,7 +496,9 @@ namespace CPSC131
 				bool empty() const
 				{
 					//	TODO: Your code here
-					
+					if(size_ == 0){
+						return true;
+					}
 					return false;
 				}
 				
@@ -468,7 +511,7 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return 0;
+					return size_;
 				}
 				
 				/**
