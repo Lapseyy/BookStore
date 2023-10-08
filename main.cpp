@@ -40,10 +40,22 @@ BookStore store;
 int main()
 {
 	//
-	menuLoop();
+	
+	CPSC131::DoublyLinkedList::DoublyLinkedList<int> list;
 	
 	//
-	cout << "Program exiting" << endl;
+	for ( size_t i = 0; i < 20; i++ ) {
+		int value = (i * 3) - 30;
+		list.push_back(value);
+	}
+	
+	
+	
+	
+	// menuLoop();
+	
+	// //
+	// cout << "Program exiting" << endl;
 	
 	return 0;
 }

@@ -33,7 +33,8 @@ namespace CPSC131::BookStore
 	 */
 	void BookStore::adjustAccountBalance(int adjustment)
 	{
-		//	TODO: Your code here
+		this->account_balance_ += adjustment;
+
 	}
 	
 	/**
@@ -41,9 +42,9 @@ namespace CPSC131::BookStore
 	 */
 	int BookStore::getAccountBalance() const
 	{
-		//	TODO: Your code here
 		
-		return 0;
+		
+		return this->account_balance_;
 	}
 	
 	/**
@@ -55,7 +56,7 @@ namespace CPSC131::BookStore
 	 */
 	DoublyLinkedList::DoublyLinkedList<Book>::Iterator BookStore::findBook(std::string isbn) const
 	{
-		//	TODO: Your code here
+		//DoublyLinkedList::DoublyLinkedList<Book>::Iterator() it = 
 		
 		return DoublyLinkedList::DoublyLinkedList<Book>::Iterator();
 	}
