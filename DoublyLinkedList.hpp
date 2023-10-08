@@ -654,11 +654,20 @@ namespace CPSC131
 				 */
 				Iterator push_back(const T& value)
 				{
-					Node* newNode = new Node(value, tail_, nullptr);
-					this->tail_->setNext(newNode);
-					this->tail_ = newNode;
+					if(tail_ == nullptr){
+						this->tail_ = new Node(value, nullptr, nullptr);
+						this->head_ = this->tail_;
+
+
+					}
+					else{
+						Node* newNode = new Node(value, tail_, nullptr);
+						this->tail_->setNext(newNode);
+						this->tail_ = newNode;
+						
+					}
 					this->size_++;
-					return Iterator(this->head_, this->tail_);
+					return Iterator(nullptr, tail_);
 					
 				}
 				
