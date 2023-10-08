@@ -46,10 +46,14 @@ int main()
 	//
 	for ( size_t i = 0; i < 20; i++ ) {
 		int value = (i * 3) - 30;
-		std::cout << "try to add " << i << std::endl;
 		list.push_back(value);
-		std::cout << "ADDED " << i << std::endl;
+		std::cout << "value at  " << i << " is " << value << std::endl;
 	}
+	for ( size_t i = 0; i < 20; i++ ) {
+		std::cout << "Checking after at  " << i << " it is " << list.at(i) << std::endl;
+	}
+	
+	
 	
 	
 	

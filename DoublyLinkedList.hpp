@@ -738,9 +738,14 @@ namespace CPSC131
 				 */
 				T& at(size_t index)
 				{
-					//	TODO: Your code here
-					
-					return *(new T());
+					if (index >= size_ && index < 0){
+						throw std::out_of_range("Out of range");
+					}
+					Node* curr = this->head_ ;
+					for (size_t i = 0; i < index; i++){
+						curr = curr->getNext();
+					}
+					return curr->getElement();
 				}
 				
 				/**
