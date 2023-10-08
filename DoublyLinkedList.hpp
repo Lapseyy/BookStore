@@ -518,13 +518,18 @@ namespace CPSC131
 				 * Clears our entire list, making it empty
 				 * Remember: All removal operations should be memory-leak free.
 				 */
-				void clear()
-				{
-				// Node * curr = head;
-				// while (head != nullptr){
-				// 	curr = head_->getNext();
-				// 	free(head);
-				// 	head_ = head_.getNext();}
+				void clear(){
+				Node* curr = new Node();
+				
+				while (head_->getNext() != nullptr  || curr == nullptr){
+					curr = head_->getNext();
+					free(head_);
+					head_ = head_->getNext();
+					}
+					free(head_);
+					head_ = nullptr;
+					tail_ = nullptr;
+					size_ = 0;
 				}
 				
 				/**
@@ -639,11 +644,11 @@ namespace CPSC131
 				 */
 				void push_front(const T& value)
 				{
-					//	TODO: Your code here
-					// Node* newNode = new Node(value, nullptr, head_);
-					// head_.setPrev(newNode);
-					// head_ = newNode;
-					// size_ ++;
+						//TODO: Your code here
+					Node* newNode = new Node(value, nullptr, head_);
+					head_->setPrev(newNode);
+					head_ = newNode;
+					size_ ++;
 
 				}
 				

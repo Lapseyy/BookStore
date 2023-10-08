@@ -54,13 +54,14 @@ int main()
 	// for ( size_t i = 0; i < 20; i++ ) {
 	// 	//std::cout << "Checking after at  " << i << " it is " << list.at(i) << std::endl;
 	// }
-	// std::cout << "SIZE is " << list.size() << std::endl;
-	// //std::cout << "Last is " << list.front() << std::endl;
-	// //ist.pop_front();
-	// std::cout << "SIZE is " << list.size() << std::endl;
-	// std::cout << "Last is " << list.back() << std::endl;
-	
-	
+	std::cout << "SIZE is " << list.size() << std::endl;
+	//std::cout << "Last is " << list.front() << std::endl;
+	list.push_front(100);
+	std::cout << "SIZE is " << list.size() << std::endl;
+	std::cout << "Last is " << list.front() << std::endl;
+	list.clear();
+	std::cout << "SIZE is " << list.size() << std::endl;
+	//std::cout << "Last is " << list.front() << std::endl;
 	
 	
 	
