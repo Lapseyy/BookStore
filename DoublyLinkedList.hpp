@@ -520,7 +520,13 @@ namespace CPSC131
 				 */
 				void clear()
 				{
-					//	TODO: Your code here
+				Node * curr = head;
+				while (head != nullptr){
+					curr = head_->getNext();
+					free(head);
+					head_ = head_.getNext();
+
+				}
 				}
 				
 				/**
@@ -538,10 +544,34 @@ namespace CPSC131
 				 */
 				Iterator insert_after(Iterator pos, const T& value)
 				{
-					//	TODO: Your code here
+					if(size_ = 0){
+						Node* newNode = new Node(value, nullptr, nullptr);
+						head_ = newNode;
+						tail_  = newNode
+						size_ =1;
+						return Iterator(newNode);
+					}
 					
-					//
-					return Iterator();
+					if (this->end() = pos){
+					Node* newNode = new Node(value);
+					tail_.setNext(newNode);
+					newNode->setPrev(tail_);
+					tail_ = newNode;
+					size ++;
+					return Iterator(newNode);
+
+					}
+					
+					size ++;
+					
+					Node* newNode = new Node(value);
+					Node* prevNode = pos.getCursor();
+					Node* nextNode = pos++.getCursor();
+					prevNode.setNext(newNode);
+					newNode.setNext(nextNode);
+					newNode.setPrev(prevNode);
+					nextNode.setPrev(newNode);
+					return pos--;
 				}
 				
 				/**
@@ -557,8 +587,12 @@ namespace CPSC131
 				Iterator insert_after(size_t pos, const T& value)
 				{
 					//	TODO: Your code here
+					Iterator it = new Iterator(head_);
+					it += pos;
 					
-					return Iterator();
+
+
+					return this->insert_after(it, value);
 				}
 				
 				/**
@@ -572,9 +606,20 @@ namespace CPSC131
 				 */
 				Iterator erase(Iterator pos)
 				{
-					//	TODO: Your code here
+					if (pos == nullptr){
+						throw std::out_of_range("Out of range");
+					}
+
+					Node* prevNode = pos--.getCursor();
+					Node* nextNode = pos++.getCursor();
+					node* currNode = pos.getCursor();
+					free(currNode);
+					prevNode.setNext(nextNode);
+					nextNode.setPrev(prevNode);
+
+
 					
-					return Iterator();
+					return pos ++;
 				}
 				
 				/**
@@ -584,10 +629,10 @@ namespace CPSC131
 				 */
 				Iterator push_after(Iterator pos, const T& value)
 				{
-					//	TODO: Your code here
+					
 					
 					//
-					return Iterator();
+					return this->insert_after(pos, value);
 				}
 				
 				/**
@@ -596,6 +641,11 @@ namespace CPSC131
 				void push_front(const T& value)
 				{
 					//	TODO: Your code here
+					Node* newNode = new Node(value, nullptr, head_);
+					head_.setPrev(newNode);
+					head_ = newNode;
+					size_ ++;
+
 				}
 				
 				/**
@@ -605,9 +655,10 @@ namespace CPSC131
 				 */
 				Iterator push_back(const T& value)
 				{
-					//	TODO: Your code here
-					
-					return Iterator();
+					Node* newNode = new Node(value, tail_, nullptr);
+					tail_.setNext(newNode):
+					tail_ = newNode;
+					return Iterator(tail_);
 				}
 				
 				/**
@@ -617,7 +668,11 @@ namespace CPSC131
 				 */
 				void pop_front()
 				{
-					//	TODO: Your code here
+				Node* newHead = head_.getNext();
+				newHead.setPrev(nullptr);
+				free(head_);
+				head_ = newHead;
+
 				}
 				
 				/**
