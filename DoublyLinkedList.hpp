@@ -220,7 +220,7 @@ namespace CPSC131
 						 */
 						Iterator& operator++()
 						{
-							cursor_= cursor_.getNext();
+							cursor_= cursor_->getNext();
 
 							
 							return *this;
@@ -233,7 +233,8 @@ namespace CPSC131
 						Iterator operator++(int)
 						{
 							Iterator prev = *this;
-							cursor_ = cursor_.getNext();
+							cursor_ = cursor_->getNext();
+
 							return prev;
 
 							//	TODO: Your code here
@@ -247,9 +248,7 @@ namespace CPSC131
 						 */
 						Iterator& operator--()
 						{
-							cursor_= cursor_.getPrev();
-
-							
+							cursor_= cursor_->getPrev();
 							return *this;
 						}
 						
@@ -325,9 +324,7 @@ namespace CPSC131
 						 */
 						T& operator*()
 						{
-							
-				
-							return *(cursor_.getElement());
+							return this->cursor_->getElement();
 						}
 					
 					private:
@@ -464,7 +461,7 @@ namespace CPSC131
 				{
 					
 					
-					return Iterator(head_);
+					return Iterator(head_, tail_, head_);
 				}
 				
 				/**
@@ -474,7 +471,7 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return Iterator(tail_);
+					return Iterator(head_, tail_, tail_);
 				}
 				
 				/**
@@ -487,7 +484,8 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return Iterator(nullptr);
+					
+					return Iterator(head_, tail_, nullptr);
 				}
 				
 				/**
@@ -509,7 +507,7 @@ namespace CPSC131
 				 */
 				size_t size() const
 				{
-					//	TODO: Your code here
+					//	TODO: Your code here :3
 					
 					return size_;
 				}

@@ -54,6 +54,14 @@ int main()
 	// for ( size_t i = 0; i < 20; i++ ) {
 	// 	//std::cout << "Checking after at  " << i << " it is " << list.at(i) << std::endl;
 	// }
+	auto itr = list.begin();
+	std::cout << (*itr) << std::endl;
+	itr++;
+	++itr;
+	--itr;
+	std::cout << (*itr) << std::endl;
+	
+
 	std::cout << "SIZE is " << list.size() << std::endl;
 	//std::cout << "Last is " << list.front() << std::endl;
 	list.push_front(100);
