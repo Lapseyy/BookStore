@@ -207,7 +207,7 @@ namespace CPSC131
 						///	Inequality comparison operator
 						bool operator!=(const Iterator& other)
 						{
-							if (head_ != other.begin() && tail_ != other.end() && cursor_ != other.getCursor()){
+							if (this->head_ != other.begin() && this->tail_ != other.end() && this->cursor_ != other.getCursor()){
 								return true;
 							}
 							
@@ -270,7 +270,7 @@ namespace CPSC131
 						Iterator operator +=(size_t add)
 						{
 							for(size_t i = 0 ; i < add; i++){
-								cursor_ = cursor_.getNext();
+								cursor_ = cursor_->getNext();
 							}
 							
 							return *this;
@@ -282,7 +282,7 @@ namespace CPSC131
 						Iterator operator -=(size_t add)
 						{
 							for(size_t i = 0 ; i < add; i++){
-								cursor_ = cursor_.getPrev();
+								cursor_ = cursor_->getPrev();
 							}
 							
 							return *this;
