@@ -54,12 +54,16 @@ int main()
 	// for ( size_t i = 0; i < 20; i++ ) {
 	// 	//std::cout << "Checking after at  " << i << " it is " << list.at(i) << std::endl;
 	// }
-	auto itr = list.begin();
-	std::cout << (*itr) << std::endl;
-	itr++;
-	++itr;
-	--itr;
-	std::cout << (*itr) << std::endl;
+	std::cout << "SIZE is " << list.size() << std::endl;
+	list.assign(22, 50504);
+	std::cout << "SIZE is " << list.size() << std::endl;
+	std::cout << "element is " << list.at(0) << std::endl;
+	// auto itr = list.begin();
+	// std::cout << (*itr) << std::endl;
+	// itr++;
+	// ++itr;
+	// --itr;
+	// std::cout << (*itr) << std::endl;
 	
 
 	std::cout << "SIZE is " << list.size() << std::endl;

@@ -304,14 +304,14 @@ namespace CPSC131
 						{
 							if(add > 0){
 								for(size_t i = 0 ; i < add; i++){
-								cursor_ = cursor_->getNext();
-						
-							} 
+									cursor_ = cursor_->getNext();
+								} 
 							
 							}
 							else if(add < 0){
 								for(size_t i = 0 ; i < add; i++){
-								cursor_ = cursor_->getPrev();
+									cursor_ = cursor_->getPrev();
+								}
 						
 							} 
 							
@@ -325,25 +325,19 @@ namespace CPSC131
 						Iterator operator -=(int subtract)
 						{
 							
-						if(add > 0){
+						if(subtract > 0){
 							for(size_t i = 0 ; i < subtract; i++){
-							cursor_ = cursor_->getNext();
-					
-						} 
+								cursor_ = cursor_->getPrev();
+							} 
 						
 						}
-						else if(add < 0){
+						else if(subtract < 0){
 							for(size_t i = 0 ; i < subtract; i++){
-							cursor_ = cursor_->getPrev();
+								cursor_ = cursor_->getNext();
+							}
 					
 						} 
-							//	TODO: Your code here
-							// if(subtract > 0){
-							// 	*this -= add;
-							// }
-							// else if(subtract < 0){
-							// 	*this += add;
-							// }
+
 							
 							return *this;
 						}
@@ -382,10 +376,7 @@ namespace CPSC131
 				size_t size_ = 0;
 				*/
 				/// Your welcome
-				DoublyLinkedList()
-				{
-				
-				}
+				DoublyLinkedList(){}
 				
 				///	Copy Constructor
 				DoublyLinkedList(DoublyLinkedList& other)
@@ -414,21 +405,22 @@ namespace CPSC131
 				 */
 				void assign(size_t count, const T& value)
 				{
-				// this->clear();
+				
+				this->clear();
 				
 				
-				// Node* curr = new Node(value, nullptr, nullptr);
-				// head_ = curr;
+				Node* curr = new Node(value, nullptr, nullptr);
+				this->head_ = curr;
 
 
-				// for(size_ i =1; i < count ; i++){
-				// 	Node * newNode = new Node(value, curr, nullptr);
-				// 	curr->setNext(newNode);
-				// 	curr = newNode;
+				for(size_t i =1; i < count ; i++){
+					Node* newNode = new Node(value, curr, nullptr);
+					curr->setNext(newNode);
+					curr = newNode;
 					
-				// }
-				// size_ = count; 
-				// tail_ = curr;
+				}
+				size_ = count; 
+				tail_ = curr;
 				}
 				
 				/**
