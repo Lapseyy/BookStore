@@ -86,10 +86,14 @@ namespace CPSC131
 						}
 						
 						/// Get a pointer to the previous element
-						Node* getPrevious() { return this-> prev_; }
+						Node* getPrevious(){ 
+							return this-> prev_; 
+							}
 						
 						/// Get a pointer to the previous element
-						Node* getPrev() { return this->prev_; }
+						Node* getPrev(){ 
+							return this->prev_; 
+							}
 						
 						/// Set the pointer to the next node
 						void setNext(Node* next) {
@@ -97,7 +101,9 @@ namespace CPSC131
 						}
 						
 						/// Get a pointer to the next node
-						Node* getNext() { return this->next_; }
+						Node* getNext(){ 
+							return this->next_; 
+							}
 						
 						/// Set the element this node holds
 						void setElement(T element) {
@@ -110,7 +116,8 @@ namespace CPSC131
 						
 						/// Return a reference to the element
 						///	YOUR WELCOME
-						T& operator*() { return this->element_; }
+						T& operator*() { 
+							return this->element_; }
 						
 					private:
 						T element_;
@@ -155,11 +162,11 @@ namespace CPSC131
 						Node* begin()
 						{
 						
-							if (head_ == nullptr ){
-								return end();
+							if (this->head_ == nullptr ){
+								return this->end();
 							}
 
-							return head_;
+							return this->head_;
 						}
 						
 						///	Get a node pointer representing "end" (aka "depleted"). 
@@ -176,7 +183,7 @@ namespace CPSC131
 						///	Get the node to which this iterator is currently pointing
 						Node* getCursor()
 						{
-							return cursor_;
+							return this->cursor_;
 							
 							//return nullptr;
 						}
@@ -207,7 +214,9 @@ namespace CPSC131
 						///	Inequality comparison operator
 						bool operator!=(const Iterator& other)
 						{
-							if (this->head_ != other.begin() && this->tail_ != other.end() && this->cursor_ != other.getCursor()){
+							if (this->head_->getElement() != other.begin()->getElement() && 
+							this->tail_->getElement() != other.end()->getElement() && 
+							this->cursor_->getElement() != other.getCursor()->getElement()){
 								return true;
 							}
 							
@@ -270,7 +279,7 @@ namespace CPSC131
 						Iterator operator +=(size_t add)
 						{
 							for(size_t i = 0 ; i < add; i++){
-								cursor_ = cursor_->getNext();
+								this->cursor_ = cursor_->getNext();
 							}
 							
 							return *this;
@@ -293,12 +302,19 @@ namespace CPSC131
 						 */
 						Iterator operator +=(int add)
 						{
-							// if(add > 0){
-							// 	*this += add;
-							// }
-							// else if(add < 0){
-							// 	*this -= add;
-							// }
+							if(add > 0){
+								for(size_t i = 0 ; i < add; i++){
+								cursor_ = cursor_->getNext();
+						
+							} 
+							
+							}
+							else if(add < 0){
+								for(size_t i = 0 ; i < add; i++){
+								cursor_ = cursor_->getPrev();
+						
+							} 
+							
 							
 							return *this;
 						}
@@ -308,6 +324,19 @@ namespace CPSC131
 						 */
 						Iterator operator -=(int subtract)
 						{
+							
+						if(add > 0){
+							for(size_t i = 0 ; i < subtract; i++){
+							cursor_ = cursor_->getNext();
+					
+						} 
+						
+						}
+						else if(add < 0){
+							for(size_t i = 0 ; i < subtract; i++){
+							cursor_ = cursor_->getPrev();
+					
+						} 
 							//	TODO: Your code here
 							// if(subtract > 0){
 							// 	*this -= add;
@@ -373,6 +402,7 @@ namespace CPSC131
 					head_ = nullptr;
 					tail_ = nullptr;
 					size_ = 0;
+					//probably needs to destruct
 
 			
 				}
@@ -443,7 +473,7 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return head_;
+					return this->head_;
 				}
 				
 				/// Return a pointer to the tail node, if any
@@ -451,7 +481,7 @@ namespace CPSC131
 				{
 					//	TODO: Your code here
 					
-					return tail_;
+					return this->tail_;
 				}
 				
 				/**
@@ -461,7 +491,7 @@ namespace CPSC131
 				{
 					
 					
-					return Iterator(head_, tail_, head_);
+					return Iterator(this->head_, this->tail_, this->head_);
 				}
 				
 				/**
@@ -517,7 +547,7 @@ namespace CPSC131
 				 * Remember: All removal operations should be memory-leak free.
 				 */
 				void clear(){
-				Node* curr = new Node();
+				Node* curr = nullptr;
 				
 				while (head_->getNext() != nullptr  || curr == nullptr){
 					curr = head_->getNext();
@@ -528,6 +558,9 @@ namespace CPSC131
 					head_ = nullptr;
 					tail_ = nullptr;
 					size_ = 0;
+
+					//what about using ~T
+					
 				}
 				
 				/**
