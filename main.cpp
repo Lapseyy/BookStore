@@ -42,36 +42,73 @@ int main()
 	//
 	
 	CPSC131::DoublyLinkedList::DoublyLinkedList<int> list;
-	
-	//
-	//std::cout << "list is " << list.empty() << std::endl;
-	for ( size_t i = 0; i < 20; i++ ) {
-		int value = (i * 3) - 30;
-		list.push_back(value);
-		std::cout << "value at  " << i << " is " << value << std::endl;
-	}
-	cout << list.at(0) << endl;
-	cout << list.at(3) << endl;
-	cout << list.at(16) << endl;
+	for ( int i = 0; i < 100; i++ ) {
+					list.push_front(i * 2);
+					list.push_back(i * 2);
+				}
 	cout << list.size() << endl;
-	list.insert_after(7, 119);
-	cout << list.at(8) << " Should be 119" << endl;
-	for ( int i = 0; i < 20; i++ ) {
-		cout << list.at(i) << endl;
-	}
-	list.insert_after(13, 181);
-	cout << list.size() << " Should be 22" << endl;
-	cout << list.at(8) << " Should be 119" << endl;
-	cout << list.at(14) << " Should be 181" << endl;
-	list.push_front(1011);
-	list.push_back(1012);
-	cout << list.size() << " Should be 24" << endl;
-	cout << list.at(0) << " Should be 1011" << endl;
-	cout << list.at(list.size() - 1) << " Should be 1012" << endl;
-	cout << list.front() << " Should be 1011" << endl;
-	cout << list.back() << " Should be 1012" << endl;
-	CPSC131::DoublyLinkedList::DoublyLinkedList<int> list2;
-	list2.push_front(19);
+	for ( int i = 0; i < 50; i++ ) {
+					list.pop_front();
+					list.pop_back();
+				}
+	cout << list.size() << endl;
+	cout << list.empty() << endl;
+	for ( int i = 0; i < 50; i++ ) {
+					list.pop_front();
+					list.pop_back();
+					cout << "Popped " << i << endl;
+				}
+				cout << list.size() << endl;
+	cout << list.empty() << endl;
+	// //std::cout << "list is " << list.empty() << std::endl;
+	// for ( size_t i = 0; i < 20; i++ ) {
+	// 	int value = (i * 3) - 30;
+	// 	list.push_back(value);
+	// 	std::cout << "value at  " << i << " is " << value << std::endl;
+	// }
+	// auto itr = list.begin();
+	// itr++;
+	// cout << *itr << endl;
+	// ++itr;
+	// cout << *itr << endl;
+	// itr += 10;
+	// cout << *itr << endl;
+	// itr -= 4;
+	// cout << *itr << endl;
+	// itr--;
+	// cout << *itr << endl;
+	// --itr;
+	// cout << *itr << endl;
+	// auto itr2 = itr;
+	// cout << (itr == itr2) << endl;
+	// itr2++;
+	// cout << (itr != itr2) << endl;
+	// itr += 5000;
+	// cout << (itr == list.end()) << endl;
+
+
+	// cout << list.at(0) << endl;
+	// cout << list.at(3) << endl;
+	// cout << list.at(16) << endl;
+	// cout << list.size() << endl;
+	// list.insert_after(7, 119);
+	// cout << list.at(8) << " Should be 119" << endl;
+	// for ( int i = 0; i < 20; i++ ) {
+	// 	cout << list.at(i) << endl;
+	// }
+	// list.insert_after(13, 181);
+	// cout << list.size() << " Should be 22" << endl;
+	// cout << list.at(8) << " Should be 119" << endl;
+	// cout << list.at(14) << " Should be 181" << endl;
+	// list.push_front(1011);
+	// list.push_back(1012);
+	// cout << list.size() << " Should be 24" << endl;
+	// cout << list.at(0) << " Should be 1011" << endl;
+	// cout << list.at(list.size() - 1) << " Should be 1012" << endl;
+	// cout << list.front() << " Should be 1011" << endl;
+	// cout << list.back() << " Should be 1012" << endl;
+	// CPSC131::DoublyLinkedList::DoublyLinkedList<int> list2;
+	// list2.push_front(19);
 	
 
 

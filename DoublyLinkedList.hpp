@@ -173,11 +173,11 @@ namespace CPSC131
 						//Probably want to just use nullptr.
 						Node* end()
 						{
-							if (tail_ != nullptr){
-								return tail_;
+							if (tail_ == nullptr){
+								return nullptr;
 							}
 							
-							return nullptr;
+							return tail_;
 						}
 						
 						///	Get the node to which this iterator is currently pointing
@@ -205,20 +205,22 @@ namespace CPSC131
 						///	Comparison operator
 						bool operator==(const Iterator& other)
 						{
-							// if (head_ == other.begin() && tail_ == other.end() && cursor_ == other.getCursor()){
-							// 	return true;
-							// }
+							if (this->head_ == other.head_
+							&& this->tail_ == other.tail_
+							&& this->cursor_ == other.cursor_){
+								return true;
+							}
 							
 							return false;
 						}
 						///	Inequality comparison operator
 						bool operator!=(const Iterator& other)
 						{
-							// if (this->head_->getElement() != other.begin()->getElement() && 
-							// this->tail_->getElement() != other.end()->getElement() && 
-							// this->cursor_->getElement() != other.getCursor()->getElement()){
-							// 	return true;
-							// }
+							if (this->head_ != other.head_
+							|| this->tail_ != other.tail_
+							|| this->cursor_ != other.cursor_){
+								return true;
+							}
 							
 							return false;
 						}
@@ -305,15 +307,25 @@ namespace CPSC131
 							if(add > 0){
 								for(int i = 0 ; i < add; i++){
 									cursor_ = cursor_->getNext();
+									if(cursor_ == nullptr){
+										cursor_ = this->end();
+										break;
+									}
 								} 
 							
 							}
 							else if(add < 0){
 								for(int i = 0 ; i < add; i++){
 									cursor_ = cursor_->getPrev();
+									if(cursor_ == nullptr){
+										cursor_ = this->end();
+										break;
+									}
 								}
+								
 						
 							} 
+							
 							
 							
 							return *this;
@@ -512,7 +524,7 @@ namespace CPSC131
 					//	TODO: Your code here
 					
 					
-					return Iterator(head_, tail_, nullptr);
+					return Iterator(head_, tail_, tail_);
 				}
 				
 				/**
@@ -626,7 +638,7 @@ namespace CPSC131
 					//	TODO: Your code here
 					//std::cout << "+++++++++++++++++++++++++" << pos << std::endl;
 					Iterator it = Iterator(this->head_, this->tail_, this->head_);
-					//std::cout << "pos shold be" << it.getCursor()->getElement() << std::endl;
+					std::cout << "pos shold be" << it.getCursor()->getElement() << std::endl;
 					it += pos;
 					//std::cout << "pos shold be" << it.getCursor()->getElement() << std::endl;
 					return this->insert_after(it, value);
@@ -729,11 +741,20 @@ namespace CPSC131
 				if (size_ == 0){
 						throw std::out_of_range("Out of range");
 					}
-				Node* newHead = head_->getNext();
-				newHead->setPrev(nullptr);
-				free(head_);
-				head_ = newHead;
+				if(size_ - 1 == 0){
+					free(head_);
+					head_ = nullptr;
+					tail_ = nullptr;
+				}
+				else{
+					Node* newHead = head_->getNext();
+					newHead->setPrev(nullptr);
+					free(head_);
+					head_ = newHead;
+					
+				}
 				size_--;
+				
 				}
 				
 				/**
@@ -746,10 +767,17 @@ namespace CPSC131
 				if (size_ == 0){
 						throw std::out_of_range("Out of range");
 					}
-				Node* newTail = tail_->getPrev();
-				newTail->setNext(nullptr);
-				free(tail_);
-				tail_ = newTail;
+					if(size_ - 1 == 0){
+					free(head_);
+					head_ = nullptr;
+					tail_ = nullptr;
+				}
+				else{
+					Node* newTail = tail_->getPrev();
+					newTail->setNext(nullptr);
+					free(tail_);
+					tail_ = newTail;
+				}
 				size_--;
 				}
 				
@@ -812,6 +840,7 @@ namespace CPSC131
 				void reverse()
 				{
 					//	TODO: Your code here
+					Node* node = new node(); 
 				}
 				
 				/**
@@ -861,9 +890,23 @@ namespace CPSC131
 				 */
 				bool operator ==(DoublyLinkedList<T>& other)
 				{
-					//	TODO: Your code here
+					//compare the elements in the node of the list onto the other.
+					Node* thisCurr = this->head_; 
+					Node* otherCurr = other.head();
+					if(this->size_ != other.size()){
+						return false;
+					}
+					for(size_t i = 0; i < size_; i++){
+						if(thisCurr->getElement() != otherCurr->getElement()){
+							return false;
+						}
+						thisCurr = thisCurr->getNext();
+						otherCurr = otherCurr->getNext();
+					}				
+					// if(this->element == *this->){}
+									
 					
-					return false;
+					return true;
 				}
 				
 				/**
@@ -876,7 +919,19 @@ namespace CPSC131
 				bool operator !=(DoublyLinkedList<T>& other)
 				{
 					//	TODO: Your code here
-					
+					//bool isEven = true;
+					Node* thisCurr = this->head_; 
+					Node* otherCurr = other.head();
+					if(this->size_ != other.size()){
+						return true;
+					}
+					for(size_t i = 0; i < size_; i++){
+						if(thisCurr->getElement() != otherCurr->getElement()){
+							return true;
+						}
+						thisCurr = thisCurr->getNext();
+						otherCurr = otherCurr->getNext();
+					}	
 					return false;
 				}
 				
