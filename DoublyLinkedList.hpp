@@ -849,13 +849,16 @@ namespace CPSC131
 				void reverse()
 				{
 					//	TODO: Your code here
-					DoublyLinkedList temp = DoublyLinkedList();
+					DoublyLinkedList temp;
+					size_t newSize = 0;
 					Node* curr =  this->head_;
-					while(curr->getNext() != nullptr){
+					while(curr != nullptr){
 						temp.push_front(curr->getElement());
 						curr = curr->getNext();
+						newSize++;
 					}
 					*this = temp;
+					this->size_ = newSize;
 
 				}
 				
