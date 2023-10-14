@@ -205,20 +205,20 @@ namespace CPSC131
 						///	Comparison operator
 						bool operator==(const Iterator& other)
 						{
-							if (head_ == other.begin() && tail_ == other.end() && cursor_ == other.getCursor()){
-								return true;
-							}
+							// if (head_ == other.begin() && tail_ == other.end() && cursor_ == other.getCursor()){
+							// 	return true;
+							// }
 							
 							return false;
 						}
 						///	Inequality comparison operator
 						bool operator!=(const Iterator& other)
 						{
-							if (this->head_->getElement() != other.begin()->getElement() && 
-							this->tail_->getElement() != other.end()->getElement() && 
-							this->cursor_->getElement() != other.getCursor()->getElement()){
-								return true;
-							}
+							// if (this->head_->getElement() != other.begin()->getElement() && 
+							// this->tail_->getElement() != other.end()->getElement() && 
+							// this->cursor_->getElement() != other.getCursor()->getElement()){
+							// 	return true;
+							// }
 							
 							return false;
 						}
@@ -303,13 +303,13 @@ namespace CPSC131
 						Iterator operator +=(int add)
 						{
 							if(add > 0){
-								for(size_t i = 0 ; i < add; i++){
+								for(int i = 0 ; i < add; i++){
 									cursor_ = cursor_->getNext();
 								} 
 							
 							}
 							else if(add < 0){
-								for(size_t i = 0 ; i < add; i++){
+								for(int i = 0 ; i < add; i++){
 									cursor_ = cursor_->getPrev();
 								}
 						
@@ -326,13 +326,13 @@ namespace CPSC131
 						{
 							
 						if(subtract > 0){
-							for(size_t i = 0 ; i < subtract; i++){
+							for(int i = 0 ; i < subtract; i++){
 								cursor_ = cursor_->getPrev();
 							} 
 						
 						}
 						else if(subtract < 0){
-							for(size_t i = 0 ; i < subtract; i++){
+							for(int i = 0 ; i < subtract; i++){
 								cursor_ = cursor_->getNext();
 							}
 					
@@ -405,19 +405,18 @@ namespace CPSC131
 				 */
 				void assign(size_t count, const T& value)
 				{
+				if(size_ != 0){
+					this->clear();
+				}
 				
-				this->clear();
-				
+				std::cout << this->size() << std::endl;
 				
 				Node* curr = new Node(value, nullptr, nullptr);
 				this->head_ = curr;
-
-
 				for(size_t i =1; i < count ; i++){
 					Node* newNode = new Node(value, curr, nullptr);
 					curr->setNext(newNode);
 					curr = newNode;
-					
 				}
 				size_ = count; 
 				tail_ = curr;
@@ -441,23 +440,29 @@ namespace CPSC131
 				 */
 				void assign(Iterator first, Iterator last)
 				{
-					// this->clear();
+					this->clear();
+					std::cout << this->size() << std::endl;
+					Iterator it = first;
 					
-					// Iterator it = first;
+					//Node* prev = nullptr;
+					Node* curr = it.getCursor();
+					this->head_ = curr;
+					it++;
 					
-					// Node* prev = nullptr;
-					// Node* curr = it.getCursor();
-					// head_ = curr
-					// it++;
-					// while (it != last){
-					// 	Node * newNode = it.getCursor();
-					// 	newNode.setPrevious(curr);
-					// 	curr.setNext(newNode);
-					// 	curr = newNode;
-					// 	it++;
+					while (it != last ){
+						Node* newNode = it.getCursor();
+						newNode->setPrevious(curr);
+						curr->setNext(newNode);
+						curr = newNode;
+						it++;
+					}
+					//if (last > first){
+					
+					//}
 
-					// }
-					// tail_ = curr;
+
+					tail_ = curr;
+				
 				}
 				
 				/// Return a pointer to the head node, if any
@@ -543,14 +548,16 @@ namespace CPSC131
 				
 				while (head_->getNext() != nullptr  || curr == nullptr){
 					curr = head_->getNext();
-					free(head_);
+					delete head_;
+					//free(head_);
 					head_ = head_->getNext();
 					}
-					free(head_);
+					delete head_;
+					//free(head_);
 					head_ = nullptr;
 					tail_ = nullptr;
 					size_ = 0;
-
+					
 					//what about using ~T
 					
 				}
@@ -570,34 +577,38 @@ namespace CPSC131
 				 */
 				Iterator insert_after(Iterator pos, const T& value)
 				{
-					// if(size_ = 0){
-					// 	Node* newNode = new Node(value, nullptr, nullptr);
-					// 	head_ = newNode;
-					// 	tail_  = newNode
-					// 	size_ =1;
-					// 	return Iterator(newNode);
-					// }
+					//std::cout << "We are going to be adding " << value << std::endl;
+					if(size_ == 0){
+						Node* newNode = new Node(value, nullptr, nullptr);
+						head_ = newNode;
+						tail_  = newNode;
+						size_ = 1;
+						return Iterator(this->head_, this->tail_, newNode);
+					}
 					
-					// if (this->end() = pos){
-					// Node* newNode = new Node(value);
-					// tail_.setNext(newNode);
-					// newNode->setPrev(tail_);
-					// tail_ = newNode;
-					// size ++;
-					// return Iterator(newNode);
+					if (this->end() == pos){
+					Node* newNode = new Node(value);
+					tail_->setNext(newNode);
+					newNode->setPrev(tail_);
+					tail_ = newNode;
+					size_++;
+					return Iterator(this->head_, this->tail_, newNode);
 
-					// }
-					
-					// size ++;
-					
-					// Node* newNode = new Node(value);
-					// Node* prevNode = pos.getCursor();
-					// Node* nextNode = pos++.getCursor();
-					// prevNode.setNext(newNode);
-					// newNode.setNext(nextNode);
-					// newNode.setPrev(prevNode);
-					// nextNode.setPrev(newNode);
-					return pos--;
+					}
+					//std::cout << "We are going to be adding no if worked " << value << std::endl;
+					size_++;
+					Node* newNode = new Node(value);
+					Node* prevNode = pos.getCursor();
+					Node* nextNode = prevNode->getNext();
+					// std::cout << "Prev" << prevNode->getElement() << std::endl;
+					// std::cout << "next " << nextNode->getElement() << std::endl;
+					// std::cout << "curr " << newNode->getElement() << std::endl;
+					prevNode->setNext(newNode);
+					newNode->setNext(nextNode);
+					newNode->setPrev(prevNode);
+					nextNode->setPrev(newNode);
+
+					return Iterator(this->head_, this->tail_, newNode);
 				}
 				
 				/**
@@ -613,13 +624,13 @@ namespace CPSC131
 				Iterator insert_after(size_t pos, const T& value)
 				{
 					//	TODO: Your code here
-					// Iterator it = new Iterator(head_);
-					// it += pos;
-					
-
-
-					//return this->insert_after(it, value);
-					return Iterator();
+					//std::cout << "+++++++++++++++++++++++++" << pos << std::endl;
+					Iterator it = Iterator(this->head_, this->tail_, this->head_);
+					//std::cout << "pos shold be" << it.getCursor()->getElement() << std::endl;
+					it += pos;
+					//std::cout << "pos shold be" << it.getCursor()->getElement() << std::endl;
+					return this->insert_after(it, value);
+					//return Iterator();
 				}
 				
 				/**
@@ -668,10 +679,19 @@ namespace CPSC131
 				void push_front(const T& value)
 				{
 						//TODO: Your code here
-					Node* newNode = new Node(value, nullptr, head_);
-					head_->setPrev(newNode);
-					head_ = newNode;
-					size_ ++;
+					if(size_ == 0){
+						Node* newNode = new Node(value, nullptr, nullptr);
+						head_ = newNode;
+						tail_ = newNode;
+						size_++;
+					}
+					else{
+						Node* newNode = new Node(value, nullptr, head_);
+						head_->setPrev(newNode);
+						head_ = newNode;
+						size_ ++;
+					}
+					
 
 				}
 				
@@ -769,7 +789,7 @@ namespace CPSC131
 				 */
 				T& at(size_t index)
 				{
-					if (index >= size_ && index < 0){
+					if (index >= size_ || index < 0){
 						throw std::out_of_range("Out of range");
 					}
 					Node* curr = this->head_ ;
