@@ -393,10 +393,17 @@ namespace CPSC131
 				///	Copy Constructor
 				DoublyLinkedList(DoublyLinkedList& other)
 				{
-					head_ = other.head();
-					tail_ = other.tail();
+					head_ = new Node(other.head()->getElement());
+					
+					Node* curr = other.head();
+					for(size_t i = 0; i < other.size_; i++){
+						this->push_back(curr->getElement());
+						if(curr->getNext() != nullptr){
+							curr = curr->getNext();
+						}
+					}
 					size_ = other.size();
-
+					tail_ = curr;
 				}
 				
 				/// DTOR
@@ -714,20 +721,22 @@ namespace CPSC131
 				 */
 				Iterator push_back(const T& value)
 				{
+					Node* newNode = nullptr;
 					if(tail_ == nullptr){
-						this->tail_ = new Node(value, nullptr, nullptr);
+						std::cout << "Only run this once" << std::endl;
+						newNode = new Node(value, nullptr, nullptr);
+						this->tail_ = newNode;
 						this->head_ = this->tail_;
-
 
 					}
 					else{
-						Node* newNode = new Node(value, tail_, nullptr);
+						newNode = new Node(value, tail_, nullptr);
 						this->tail_->setNext(newNode);
 						this->tail_ = newNode;
 						
 					}
 					this->size_++;
-					return Iterator(nullptr, tail_);
+					return Iterator(head_, tail_, newNode );
 					
 				}
 				
@@ -840,7 +849,14 @@ namespace CPSC131
 				void reverse()
 				{
 					//	TODO: Your code here
-					Node* node = new node(); 
+					DoublyLinkedList temp = DoublyLinkedList();
+					Node* curr =  this->head_;
+					while(curr->getNext() != nullptr){
+						temp.push_front(curr->getElement());
+						curr = curr->getNext();
+					}
+					*this = temp;
+
 				}
 				
 				/**
@@ -874,6 +890,16 @@ namespace CPSC131
 				DoublyLinkedList<T>& operator =(DoublyLinkedList<T>& other)
 				{
 					//	TODO: Your code here
+					std::cout << "this cfunction called" << std::endl;
+					this->clear();
+					head_ = new Node(other.head()->getElement());
+					size_ = other.size();
+					Node* curr = other.head();
+					for(size_t i = 0; i < other.size_; i++){
+						this->push_back(curr->getElement());
+						curr = curr->getNext();
+					}
+					tail_ = curr;
 					
 					return *this;
 				}

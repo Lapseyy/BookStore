@@ -41,31 +41,85 @@ int main()
 {
 	//
 	
-	CPSC131::DoublyLinkedList::DoublyLinkedList<int> list;
-	for ( int i = 0; i < 100; i++ ) {
-					list.push_front(i * 2);
-					list.push_back(i * 2);
-				}
-	cout << list.size() << endl;
-	for ( int i = 0; i < 50; i++ ) {
-					list.pop_front();
-					list.pop_back();
-				}
-	cout << list.size() << endl;
-	cout << list.empty() << endl;
-	for ( int i = 0; i < 50; i++ ) {
-					list.pop_front();
-					list.pop_back();
-					cout << "Popped " << i << endl;
-				}
-				cout << list.size() << endl;
-	cout << list.empty() << endl;
-	// //std::cout << "list is " << list.empty() << std::endl;
+	// CPSC131::DoublyLinkedList::DoublyLinkedList<int> list1;
 	// for ( size_t i = 0; i < 20; i++ ) {
 	// 	int value = (i * 3) - 30;
-	// 	list.push_back(value);
-	// 	std::cout << "value at  " << i << " is " << value << std::endl;
+	// 	list1.push_back(value);
+	// 	// std::cout << "value at  " << i << " is " << value << std::endl;
 	// }
+	// CPSC131::DoublyLinkedList::DoublyLinkedList<int> list2(list1);
+	// cout << list2.at(20) << endl;
+	// cout << list2.at(19) << endl;
+	// for ( size_t i = 0; i < 20; i++ ) {
+	// 	cout << list2.at(i) << endl;
+	// }
+	// auto list2 = list1;
+				
+
+	CPSC131::DoublyLinkedList::DoublyLinkedList<int> list;
+				list.push_front(19);
+				list.push_front(12);
+				list.push_front(-129878);
+				list.push_front(228764364);
+				list.push_front(119991111);
+				list.push_front(0);
+				list.push_front(1900000000);
+	auto list2 = list;
+	for(size_t i = 0; i < list.size(); i++){
+		cout << list.at(i) << endl;
+	}
+	cout << "_________________" << endl;
+	cout << list.size() << endl;
+	cout << list2.size() << endl;
+	for(size_t i = 0; i < list2.size(); i++){
+		cout << list2.at(i) << endl;
+	}
+
+	
+	// list2.clear();
+	// list2.push_back(27);
+	// list2.push_back(24);
+	// list2.push_back(21);
+	// list2.push_back(18);
+	// list2.push_back(15);
+	// list2.push_back(12);
+	// list2.push_back(9);
+	// list2.push_back(6);
+	// list2.push_back(3);
+	// list2.push_back(0);
+	// list2.push_back(-3);
+	// list2.push_back(-6);
+	// list2.push_back(-9);
+	// list2.push_back(-12);
+	// list2.push_back(-15);
+	// list2.push_back(-18);
+	// list2.push_back(-21);
+	// list2.push_back(-24);
+	// list2.push_back(-27);
+	// list2.push_back(-30);
+	
+	// list1.reverse();
+	// cout << list1.size() << endl;
+	// for ( int i = 0; i < 100; i++ ) {
+	// 				list.push_front(i * 2);
+	// 				list.push_back(i * 2);
+	// 			}
+	// cout << list.size() << endl;
+	// for ( int i = 0; i < 50; i++ ) {
+	// 				list.pop_front();
+	// 				list.pop_back();
+	// 			}
+	// cout << list.size() << endl;
+	// cout << list.empty() << endl;
+	// for ( int i = 0; i < 50; i++ ) {
+	// 				list.pop_front();
+	// 				list.pop_back();
+	// 				cout << "Popped " << i << endl;
+	// 			}
+	// 			cout << list.size() << endl;
+	// cout << list.empty() << endl;
+	// //std::cout << "list is " << list.empty() << std::endl;
+	
 	// auto itr = list.begin();
 	// itr++;
 	// cout << *itr << endl;
