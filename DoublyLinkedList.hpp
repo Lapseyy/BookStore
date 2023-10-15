@@ -389,22 +389,21 @@ namespace CPSC131
 				///	Copy Constructor
 				DoublyLinkedList(DoublyLinkedList& other)
 				{
-					head_ = new Node(other.head()->getElement());
-					
+					head_ = nullptr;
+					tail_ = nullptr;
+					size_ = 0;
+
 					Node* curr = other.head();
-					for(size_t i = 0; i < other.size_; i++){
+					while (curr != nullptr) {
 						this->push_back(curr->getElement());
-						if(curr->getNext() != nullptr){
-							curr = curr->getNext();
-						}
+						curr = curr->getNext();
 					}
-					size_ = other.size();
-					tail_ = curr;
 				}
 				
 				/// DTOR
 				~DoublyLinkedList()
 				{
+					this->clear();
 					head_ = nullptr;
 					tail_ = nullptr;
 					size_ = 0;
@@ -471,9 +470,7 @@ namespace CPSC131
 						curr = newNode;
 						it++;
 					}
-					//if (last > first){
-					
-					//}
+
 
 
 					tail_ = curr;
@@ -559,21 +556,14 @@ namespace CPSC131
 				 * Remember: All removal operations should be memory-leak free.
 				 */
 				void clear(){
-					Node* curr = nullptr;
 					
-					while (head_->getNext() != nullptr  || curr == nullptr){
-						curr = head_->getNext();
-						delete head_;
-						//free(head_);
+					while (head_ != nullptr) {
+						Node* curr = head_;
 						head_ = head_->getNext();
-						}
-						delete head_;
-						//free(head_);
-						head_ = nullptr;
-						tail_ = nullptr;
-						size_ = 0;
-					
-					//what about using ~T
+						delete curr;
+					}
+					tail_ = nullptr;
+					size_ = 0;
 					
 				}
 				
@@ -659,20 +649,20 @@ namespace CPSC131
 				 */
 				Iterator erase(Iterator pos)
 				{
+					// Node* it = new newNode; 
+					// newNode = 0;
 					// if (pos == nullptr){
 					// 	throw std::out_of_range("Out of range");
 					// }
 
-					// Node* prevNode = pos--.getCursor();
-					// Node* nextNode = pos++.getCursor();
-					// node* currNode = pos.getCursor();
-					// free(currNode);
-					// prevNode.setNext(nextNode);
-					// nextNode.setPrev(prevNode);
+					// // Node* prevNode = pos--.getCursor();
+					// // Node* nextNode = pos++.getCursor();
+					// // Node* currNode = pos.getCursor();
+					// // free(currNode);
+					// // prevNode.setNext(nextNode);
+					// // nextNode.setPrev(prevNode);
 
-
-					
-					return pos ++;
+					return this->end();
 				}
 				
 				/**
@@ -719,7 +709,6 @@ namespace CPSC131
 				{
 					Node* newNode = nullptr;
 					if(tail_ == nullptr){
-						std::cout << "Only run this once" << std::endl;
 						newNode = new Node(value, nullptr, nullptr);
 						this->tail_ = newNode;
 						this->head_ = this->tail_;
@@ -731,7 +720,6 @@ namespace CPSC131
 						
 					}
 					this->size_++;
-					std::cout << "Size is " << size_ << std::endl;
 					return Iterator(head_, tail_, newNode );
 					
 				}
@@ -748,13 +736,15 @@ namespace CPSC131
 					}
 				if(size_ - 1 == 0){
 					free(head_);
+					//delete head_;
 					head_ = nullptr;
 					tail_ = nullptr;
 				}
 				else{
 					Node* newHead = head_->getNext();
 					newHead->setPrev(nullptr);
-					free(head_);
+					delete head_;
+					//delete head_;
 					head_ = newHead;
 					
 				}
@@ -773,14 +763,14 @@ namespace CPSC131
 						throw std::out_of_range("Out of range");
 					}
 					if(size_ - 1 == 0){
-					free(head_);
+					delete head_;
 					head_ = nullptr;
 					tail_ = nullptr;
 				}
 				else{
 					Node* newTail = tail_->getPrev();
 					newTail->setNext(nullptr);
-					free(tail_);
+					delete tail_;
 					tail_ = newTail;
 				}
 				size_--;
@@ -889,7 +879,6 @@ namespace CPSC131
 				DoublyLinkedList<T>& operator =(DoublyLinkedList<T>& other)
 				{
 					//	TODO: Your code here
-					std::cout << "this cfunction called" << std::endl;
 					this->clear();
 					head_ = new Node(other.head()->getElement());
 					size_ = other.size();
