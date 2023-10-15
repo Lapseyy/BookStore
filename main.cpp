@@ -61,7 +61,7 @@ int main()
 	cout << store.getBookStockAvailable("1435769244") << endl;
 	store.purchaseInventory(Book("Bla", "Bla", "1435769244", 1000, 2));
 	cout << store.getBookStockAvailable("1435769244") << endl;
-
+	store.printInventory();
 
 	// CPSC131::DoublyLinkedList::DoublyLinkedList<int> list1;
 	// list1.push_back(1);

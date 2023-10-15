@@ -174,6 +174,7 @@ namespace CPSC131::BookStore
 	 */
 	void BookStore::printInventory() const
 	{
+		cout << "*** Book Store Inventory ***" << endl;
 		for (const auto& book : bookList) {
 			cout << "\"" <<  book.getTitle() << "\", by " << book.getAuthor() << " [" << book.getIsbn() << "] ("  << book.getStockAvailable() <<  " in stock)" << endl;
 		}
