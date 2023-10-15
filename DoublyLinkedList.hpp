@@ -232,8 +232,6 @@ namespace CPSC131
 						Iterator& operator++()
 						{
 							cursor_= cursor_->getNext();
-
-							
 							return *this;
 						}
 						
@@ -308,8 +306,7 @@ namespace CPSC131
 								for(int i = 0 ; i < add; i++){
 									cursor_ = cursor_->getNext();
 									if(cursor_ == nullptr){
-										cursor_ = this->end();
-										break;
+										return Iterator(head_, tail_, nullptr);
 									}
 								} 
 							
@@ -318,8 +315,7 @@ namespace CPSC131
 								for(int i = 0 ; i < add; i++){
 									cursor_ = cursor_->getPrev();
 									if(cursor_ == nullptr){
-										cursor_ = this->end();
-										break;
+										return Iterator(head_, tail_, nullptr);
 									}
 								}
 								
@@ -531,7 +527,7 @@ namespace CPSC131
 					//	TODO: Your code here
 					
 					
-					return Iterator(head_, tail_, tail_);
+					return Iterator(head_, tail_, nullptr);
 				}
 				
 				/**
@@ -563,19 +559,19 @@ namespace CPSC131
 				 * Remember: All removal operations should be memory-leak free.
 				 */
 				void clear(){
-				Node* curr = nullptr;
-				
-				while (head_->getNext() != nullptr  || curr == nullptr){
-					curr = head_->getNext();
-					delete head_;
-					//free(head_);
-					head_ = head_->getNext();
-					}
-					delete head_;
-					//free(head_);
-					head_ = nullptr;
-					tail_ = nullptr;
-					size_ = 0;
+					Node* curr = nullptr;
+					
+					while (head_->getNext() != nullptr  || curr == nullptr){
+						curr = head_->getNext();
+						delete head_;
+						//free(head_);
+						head_ = head_->getNext();
+						}
+						delete head_;
+						//free(head_);
+						head_ = nullptr;
+						tail_ = nullptr;
+						size_ = 0;
 					
 					//what about using ~T
 					
@@ -727,7 +723,6 @@ namespace CPSC131
 						newNode = new Node(value, nullptr, nullptr);
 						this->tail_ = newNode;
 						this->head_ = this->tail_;
-
 					}
 					else{
 						newNode = new Node(value, tail_, nullptr);
@@ -736,6 +731,7 @@ namespace CPSC131
 						
 					}
 					this->size_++;
+					std::cout << "Size is " << size_ << std::endl;
 					return Iterator(head_, tail_, newNode );
 					
 				}

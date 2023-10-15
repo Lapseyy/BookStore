@@ -14,6 +14,7 @@
 //
 #include <iostream>
 #include <string>
+#include <vector>
 
 
 //
@@ -34,11 +35,48 @@ string getLine();
 
 //	Globals: Not a great practice, but very good for a lazy professor making starter code :)
 BookStore store;
-
-
 //
 int main()
 {
+
+	BookStore store;
+	
+	//
+	std::vector<Book> books = {
+		Book("Brainwashing is a Cinch!", "James Maratta", "B001NDNB7C", 900),
+		Book("Catflexing - A Catlover's Guide to Weight Training, Aerobics, and Stretching", "Stephanie Jackson", "0898159407", 550),
+		Book("How to Enjoy Your Weeds", "Audrey Wynne Hatfield", "080693042X", 1200),
+		Book("How to Teach Quantum Physics to Your Dog", "Chad Orzel", "1416572295", 2000),
+		Book("How to Train Goldfish Using Dolphin Training Techniques", "C. Scott Johnson", "0533112923", 100)
+	};
+	size_t quantity = 50;
+	for ( Book b : books ) {
+			b.adjustStockAvailable(quantity);
+			quantity--;
+		
+		store.purchaseInventory(b);
+	}
+	cout << store.getAccountBalance() << endl;
+	store.purchaseInventory(Book("Ninja Mind Control", "Ashida Kim", "1435769244", 999, 3));
+	cout << store.getBookStockAvailable("1435769244") << endl;
+	store.purchaseInventory(Book("Bla", "Bla", "1435769244", 1000, 2));
+	cout << store.getBookStockAvailable("1435769244") << endl;
+
+
+	// CPSC131::DoublyLinkedList::DoublyLinkedList<int> list1;
+	// list1.push_back(1);
+	// list1.push_back(2);
+	// list1.push_back(3);
+	// list1.push_back(4);
+	// list1.push_back(5);
+	// //cout << list1.size();
+	// for(size_t i = 0; i < list1.size(); i++){
+	// 	cout << list1.at(i) << endl;
+	// }
+	// for(auto it = list1.begin(); it != list1.end(); it++){
+	// 	cout << (*it) << endl;
+	// }
+
 	//
 	
 	// CPSC131::DoublyLinkedList::DoublyLinkedList<int> list1;
@@ -56,7 +94,7 @@ int main()
 	// auto list2 = list1;
 				
 
-	CPSC131::DoublyLinkedList::DoublyLinkedList<int> list1;
+	//CPSC131::DoublyLinkedList::DoublyLinkedList<int> list1;
 	// 			list.push_front(19);
 	// 			list.push_front(12);
 	// 			list.push_front(-129878);
@@ -74,39 +112,39 @@ int main()
 	// for(size_t i = 0; i < list2.size(); i++){
 	// 	cout << list2.at(i) << endl;
 	// }
-	for ( size_t i = 0; i < 20; i++ ) {
-		int value = (i * 3) - 30;
-		list1.push_back(value);
-	}
+	// for ( size_t i = 0; i < 20; i++ ) {
+	// 	int value = (i * 3) - 30;
+	// 	list1.push_back(value);
+	// }
 
-	auto list2 = list1;
-	list2.clear();
-	list2.push_back(27);
-	list2.push_back(24);
-	list2.push_back(21);
-	list2.push_back(18);
-	list2.push_back(15);
-	list2.push_back(12);
-	list2.push_back(9);
-	list2.push_back(6);
-	list2.push_back(3);
-	list2.push_back(0);
-	list2.push_back(-3);
-	list2.push_back(-6);
-	list2.push_back(-9);
-	list2.push_back(-12);
-	list2.push_back(-15);
-	list2.push_back(-18);
-	list2.push_back(-21);
-	list2.push_back(-24);
-	list2.push_back(-27);
-	list2.push_back(-30);
+	// auto list2 = list1;
+	// list2.clear();
+	// list2.push_back(27);
+	// list2.push_back(24);
+	// list2.push_back(21);
+	// list2.push_back(18);
+	// list2.push_back(15);
+	// list2.push_back(12);
+	// list2.push_back(9);
+	// list2.push_back(6);
+	// list2.push_back(3);
+	// list2.push_back(0);
+	// list2.push_back(-3);
+	// list2.push_back(-6);
+	// list2.push_back(-9);
+	// list2.push_back(-12);
+	// list2.push_back(-15);
+	// list2.push_back(-18);
+	// list2.push_back(-21);
+	// list2.push_back(-24);
+	// list2.push_back(-27);
+	// list2.push_back(-30);
 	
-	list1.reverse();
-	cout << list1.size() << endl;
-	for ( size_t i = 0; i < list1.size(); i++ ) {
-		cout << list1.at(i) << endl;
-	}
+	// list1.reverse();
+	// cout << list1.size() << endl;
+	// for ( size_t i = 0; i < list1.size(); i++ ) {
+	// 	cout << list1.at(i) << endl;
+	// }
 	
 	// cout << list1.size() << endl;
 	// for ( int i = 0; i < 100; i++ ) {

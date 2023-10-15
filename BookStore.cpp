@@ -42,8 +42,6 @@ namespace CPSC131::BookStore
 	 */
 	int BookStore::getAccountBalance() const
 	{
-		
-		
 		return this->account_balance_;
 	}
 	
@@ -56,9 +54,12 @@ namespace CPSC131::BookStore
 	 */
 	DoublyLinkedList::DoublyLinkedList<Book>::Iterator BookStore::findBook(std::string isbn) const
 	{
-		//DoublyLinkedList::DoublyLinkedList<Book>::Iterator() it = 
-		
-		return DoublyLinkedList::DoublyLinkedList<Book>::Iterator();
+		for (auto it = bookList.begin(); it != bookList.end(); ++it) {
+        	if (it.getCursor()->getElement().getIsbn() == isbn) {
+				return it; // Return the iterator pointing to the found book
+			}
+		}
+		return bookList.end(); 
 	}
 	
 	/**
@@ -68,9 +69,12 @@ namespace CPSC131::BookStore
 	 */
 	bool BookStore::bookExists(std::string isbn) const
 	{
-		//	TODO: Your code here
-		
-		return false;
+		for (const auto& book : bookList) {
+        if (book.getIsbn() == isbn) {
+            return true;
+        }
+    }
+    return false;
 	}
 	
 	/**
@@ -81,6 +85,11 @@ namespace CPSC131::BookStore
 	size_t BookStore::getBookStockAvailable(std::string isbn) const
 	{
 		//	TODO: Your code here
+		 for (const auto& book : bookList) {
+			if (book.getIsbn() == isbn) {
+				return book.getStockAvailable();
+			}
+		}
 		
 		return 0;
 	}
@@ -92,9 +101,15 @@ namespace CPSC131::BookStore
 	 */
 	Book& BookStore::getBook(std::string isbn) const
 	{
-		//	TODO: Your code here
-		
-		return *(new Book());
+		for (auto it = bookList.begin(); it != bookList.end(); ++it) {
+			if (it.getCursor()->getElement().getIsbn() == isbn) {
+				// Found the book, return a reference to it
+				return it.getCursor()->getElement();
+			}
+    }
+
+    // Book not found, throw an exception
+    throw std::runtime_error("Book not found with ISBN: " + isbn);
 	}
 	
 	/**
@@ -110,6 +125,19 @@ namespace CPSC131::BookStore
 	void BookStore::purchaseInventory(const Book& book)
 	{
 		//	TODO: Your code here
+		
+		if(bookExists(book.getIsbn())){
+			std::cout << "BOOK EXISTS " << book.getStockAvailable() << std::endl;
+			auto it = findBook(book.getIsbn());
+			it.getCursor()->getElement().adjustStockAvailable(book.getStockAvailable());
+			std::cout << "BOOK EXISTS " << it.getCursor()->getElement().getStockAvailable() << std::endl;
+			adjustAccountBalance(-1 * book.getPriceCents() * book.getStockAvailable());
+		}
+		else{
+			std::cout << "Book no exist " << book.getTitle() << std::endl;
+			adjustAccountBalance(-1 * book.getPriceCents()  * book.getStockAvailable());
+			bookList.push_back(book);
+		}
 	}
 	
 	/**
@@ -127,7 +155,10 @@ namespace CPSC131::BookStore
 		size_t unit_count
 	)
 	{
-		//	TODO: Your code here
+		Book newbook = Book(title, author, isbn, price_cents, unit_count);
+
+    // Call the other overload of the function with the new Book object
+    	purchaseInventory(newbook);
 	}
 	
 	/**
@@ -143,7 +174,9 @@ namespace CPSC131::BookStore
 	 */
 	void BookStore::printInventory() const
 	{
-		//	TODO: Your code here
+		for (const auto& book : bookList) {
+			cout << "\"" <<  book.getTitle() << "\", by " << book.getAuthor() << " [" << book.getIsbn() << "] ("  << book.getStockAvailable() <<  " in stock)" << endl;
+		}
 	}
 	
 	/**
@@ -158,7 +191,22 @@ namespace CPSC131::BookStore
 	 */
 	void BookStore::sellToCustomer(std::string isbn, size_t price_cents, size_t quantity)
 	{
-		//	TODO: Your code here
+		Book& bookToSell = getBook(isbn);
+		// if (bookToSell.getStockAvailable() >= quantity) {
+		// 	// Calculate the total revenue
+		// 	size_t totalRevenue = price_cents * quantity;
+		// 	// Update the stock quantity
+		// 	bookToSell.decrementStock(quantity);
+		// 	// Update the store's total revenue
+		// 	totalRevenue += totalRevenue;
+		// 	// Handle the sale transaction (e.g., update records, generate a receipt, etc.)
+		// 	// You can also return the total revenue if needed
+		// 	// return totalRevenue;
+		// } else {
+		// 	// Handle the case where there is not enough stock to fulfill the sale
+		// 	// You might want to return an error code or throw an exception.
+		// }
+		return sellToCustomer(bookToSell, price_cents, quantity);
 	}
 	
 	/**
@@ -173,7 +221,17 @@ namespace CPSC131::BookStore
 	 */
 	void BookStore::sellToCustomer(Book& book, size_t price_cents, size_t quantity)
 	{
-		//	TODO: Your code here
+		Book& bookToSell = getBook(book.getIsbn());
+		if (bookToSell.getStockAvailable() < quantity) {
+       	 throw std::range_error("Not enough stock available for the customer's request");
+		}
+		// Calculate the total revenue
+		size_t totalRevenue = price_cents * quantity;
+		// Update the stock quantity
+		book.adjustStockAvailable(-1 * quantity);
+		// Update the store's account balance
+		// Assuming you have an account balance attribute in your BookStore class
+		adjustAccountBalance(totalRevenue);
 	}
 }
 
