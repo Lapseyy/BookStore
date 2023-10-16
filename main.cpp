@@ -42,26 +42,26 @@ int main()
 	BookStore store;
 	
 	//
-	std::vector<Book> books = {
-		Book("Brainwashing is a Cinch!", "James Maratta", "B001NDNB7C", 900),
-		Book("Catflexing - A Catlover's Guide to Weight Training, Aerobics, and Stretching", "Stephanie Jackson", "0898159407", 550),
-		Book("How to Enjoy Your Weeds", "Audrey Wynne Hatfield", "080693042X", 1200),
-		Book("How to Teach Quantum Physics to Your Dog", "Chad Orzel", "1416572295", 2000),
-		Book("How to Train Goldfish Using Dolphin Training Techniques", "C. Scott Johnson", "0533112923", 100)
-	};
-	size_t quantity = 50;
-	for ( Book b : books ) {
-			b.adjustStockAvailable(quantity);
-			quantity--;
+	// std::vector<Book> books = {
+	// 	Book("Brainwashing is a Cinch!", "James Maratta", "B001NDNB7C", 900),
+	// 	Book("Catflexing - A Catlover's Guide to Weight Training, Aerobics, and Stretching", "Stephanie Jackson", "0898159407", 550),
+	// 	Book("How to Enjoy Your Weeds", "Audrey Wynne Hatfield", "080693042X", 1200),
+	// 	Book("How to Teach Quantum Physics to Your Dog", "Chad Orzel", "1416572295", 2000),
+	// 	Book("How to Train Goldfish Using Dolphin Training Techniques", "C. Scott Johnson", "0533112923", 100)
+	// };
+	// size_t quantity = 50;
+	// for ( Book b : books ) {
+	// 		b.adjustStockAvailable(quantity);
+	// 		quantity--;
 		
-		store.purchaseInventory(b);
-	}
-	cout << store.getAccountBalance() << endl;
-	store.purchaseInventory(Book("Ninja Mind Control", "Ashida Kim", "1435769244", 999, 3));
-	cout << store.getBookStockAvailable("1435769244") << endl;
-	store.purchaseInventory(Book("Bla", "Bla", "1435769244", 1000, 2));
-	cout << store.getBookStockAvailable("1435769244") << endl;
-	store.printInventory();
+	// 	store.purchaseInventory(b);
+	// }
+	// cout << store.getAccountBalance() << endl;
+	// store.purchaseInventory(Book("Ninja Mind Control", "Ashida Kim", "1435769244", 999, 3));
+	// cout << store.getBookStockAvailable("1435769244") << endl;
+	// store.purchaseInventory(Book("Bla", "Bla", "1435769244", 1000, 2));
+	// cout << store.getBookStockAvailable("1435769244") << endl;
+	// store.printInventory();
 
 	// CPSC131::DoublyLinkedList::DoublyLinkedList<int> list1;
 	// list1.push_back(1);
@@ -240,10 +240,10 @@ int main()
 	
 	
 	
-	// menuLoop();
+	menuLoop();
 	
-	// //
-	// cout << "Program exiting" << endl;
+	//
+	cout << "Program exiting" << endl;
 	
 	return 0;
 }
